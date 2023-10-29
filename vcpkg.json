@@ -1,0 +1,16 @@
+{
+  "name": "prism-container",
+  "version": "1.0.0",
+  "port-version": 1,
+  "description": "prism ioc container",
+  "homepage": "https://github.com/cpp-prism/prism_container",
+  "supports": "(windows & !arm & !uwp) | osx | (linux & !arm)",
+  "dependencies": [
+    "catch2",
+    "prism",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    }
+  ]
+}
