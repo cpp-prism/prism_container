@@ -1,6 +1,6 @@
 prism-container provides CMake targets:
 
-    find_package(prism COMPONENTS prism::container)
-    target_link_libraries(main PRIVATE prism::container)
+    find_package(prism COMPONENTS prism::container [components ...])
+    target_link_libraries(main PRIVATE prism::container [components ...])
 
-    more infomation: https://github.com/cpp-prism/prism_container
+    more infomation: https://github.com/cpp-prism/prism-container

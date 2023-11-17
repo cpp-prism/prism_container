@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
+if(NOT DEFINED PRISM_VERSION)
+    file(READ "${CMAKE_CURRENT_LIST_DIR}/vcpkg.json" _contents)
+    string(JSON PRISM_VERSION GET "${_contents}" version)
+endif()
 
-project(prism_container VERSION 1.0.0.0 LANGUAGES CXX)
+project(prism_container VERSION ${PRISM_VERSION} LANGUAGES CXX)
 
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -22,8 +26,9 @@ add_library(prism::container  ALIAS  ${PROJECT_NAME})
 target_compile_features(${PROJECT_NAME} PRIVATE  cxx_std_17)
 target_compile_definitions(${PROJECT_NAME} PRIVATE PRISM_CONTIANER_LIBRARY)
 
-target_include_directories(${PROJECT_NAME} INTERFACE
+target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -69,3 +74,13 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 
 
 
+# vcpkg
+if(EXISTS ${VCPKG_ROOT})
+    execute_process( COMMAND git rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE RESULT_VARIABLE GIT_BRANCH_RESULT )
+    execute_process( COMMAND git rev-parse HEAD WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE GIT_HASH OUTPUT_STRIP_TRAILING_WHITESPACE )
+    string(REPLACE "_" "-" PORT_NAME "${PROJECT_NAME}")
+    configure_file(${PROJECT_SOURCE_DIR}/cmake/vcpkg.json.in ${VCPKG_ROOT}/ports/${PORT_NAME}/vcpkg.json @ONLY NEWLINE_STYLE LF)
+    configure_file(${PROJECT_SOURCE_DIR}/cmake/vcpkg.json.in ${PROJECT_SOURCE_DIR}/vcpkg.json @ONLY NEWLINE_STYLE LF)
+    configure_file(${PROJECT_SOURCE_DIR}/cmake/vcpkg_cus_info.json.in ${VCPKG_ROOT}/ports/${PORT_NAME}/vcpkg_cus_info.json @ONLY NEWLINE_STYLE LF)
+    file(COPY ${PROJECT_SOURCE_DIR}/cmake/portfile.cmake DESTINATION ${VCPKG_ROOT}/ports/${PORT_NAME})
+endif()
