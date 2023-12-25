@@ -42,7 +42,7 @@ class PRISM_CONTAINER_EXPORT Container
 
   public:
     // int s_nextTypeId = 1000;
-    static Container* const get();
+    static Container*  get();
 
     Container(Container&) = delete;
     Container(Container&&) = delete;

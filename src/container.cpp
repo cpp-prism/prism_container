@@ -4,7 +4,7 @@ Container::Container()
 {
 }
 
-Container * const Container::get()
+Container *  Container::get()
 {
     static Container instance;
     return &instance;
