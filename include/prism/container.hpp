@@ -2,12 +2,13 @@
 #define PRISM_CONTAINER_GLOBAL_H
 
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #  define DECL_EXPORT __declspec(dllexport)
 #  define DECL_IMPORT __declspec(dllimport)
 #else
-#  define DECL_EXPORT
-#  define DECL_IMPORT
+#  define DECL_EXPORT  __attribute__((visibility("default")))
+//#  define DECL_IMPORT  __attribute__((visibility("hidden")))
+#  define DECL_IMPORT  __attribute__((visibility("default")))
 #endif
 
 #if defined(PRISM_CONTIANER_LIBRARY)
