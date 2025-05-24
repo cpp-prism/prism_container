@@ -118,14 +118,14 @@ class PRISM_CONTAINER_EXPORT Container
     void register_functor()
     {
         m_factories[GetTypeID<TInterface>()] =
-            std::make_shared<CFactory<T2>>([=] { return std::make_shared<T2>(resolve_object<T2ps>()...); });
+            std::make_shared<CFactory<T2>>([=,this] { return std::make_shared<T2>(resolve_object<T2ps>()...); });
     }
     // Most basic implementation - register a functor
     template <typename TInterface, typename... TS>
     void register_functor(std::function<std::shared_ptr<TInterface>(std::shared_ptr<TS>... ts)> functor)
     {
         m_factories[GetTypeID<TInterface>()] =
-            std::make_shared<CFactory<TInterface>>([=] { return functor(resolve_object<TS>()...); });
+            std::make_shared<CFactory<TInterface>>([=,this] { return functor(resolve_object<TS>()...); });
     }
 
     // Register one instance of an object
@@ -133,7 +133,7 @@ class PRISM_CONTAINER_EXPORT Container
     void register_instance(std::shared_ptr<TInterface> t)
     {
         m_factories[GetTypeID<TInterface>()] =
-            std::make_shared<CFactory<TInterface>>([=] { return t; });
+            std::make_shared<CFactory<TInterface>>([=,this] { return t; });
     }
 
     // Supply a function pointer
