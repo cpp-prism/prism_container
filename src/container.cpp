@@ -1,14 +1,14 @@
 #include "include/prism/container.hpp"
-namespace prism {
+namespace prism
+{
 Container::Container()
 {
 }
 
-Container *  Container::get()
+Container *Container::get()
 {
     static Container instance;
     return &instance;
 }
 
-
-}// namespace  prism
+} // namespace  prism
