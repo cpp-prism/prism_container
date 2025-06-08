@@ -122,7 +122,7 @@ class PRISM_CONTAINER_EXPORT Container
     // Register one instance of an object
     template <typename TInterface> void register_instance(std::shared_ptr<TInterface> t)
     {
-        m_factories[GetTypeID<TInterface>()] = std::make_shared<CFactory<TInterface>>([=, this] { return t; });
+        m_factories[GetTypeID<TInterface>()] = std::make_shared<CFactory<TInterface>>([=] { return t; });
     }
 
     // Supply a function pointer
