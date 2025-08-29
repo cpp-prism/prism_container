@@ -63,6 +63,10 @@ class PRISM_CONTAINER_EXPORT Container
     // todo: consider sorted vector
     std::unordered_map<size_t, std::shared_ptr<FactoryRoot>> m_factories;
 
+    void clear(){
+        m_factories.clear();
+    }
+
     template <typename T> class CFactory : public FactoryRoot
     {
         std::function<std::shared_ptr<T>()> m_functor;
