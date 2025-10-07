@@ -1,0 +1,22 @@
+{
+  "name": "@nocanstillbb/prism_container",
+  "version": "0.1.0",
+  "description": "Header-only C++ library for React Native TurboModules",
+  "license": "MIT",
+  "keywords": [
+    "cpp",
+    "prism_container"
+  ],
+  "files": [
+    "include",
+    "src"
+  ],
+  "react-native": "react-native.config.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cpp-prism/prism.git"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.78.0"
+  }
+}

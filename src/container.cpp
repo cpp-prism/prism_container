@@ -1,4 +1,9 @@
+#ifdef USING_COCOAPODS
+#include "prism/container.hpp"
+#else
 #include "include/prism/container.hpp"
+#endif
+
 namespace prism
 {
 Container::Container()
