@@ -1,4 +1,4 @@
-#ifdef USING_COCOAPODS
+#ifdef PRISMUI_COCOAPODS
 #include "prism/container.hpp"
 #else
 #include "include/prism/container.hpp"
