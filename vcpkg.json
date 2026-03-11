@@ -1,6 +1,6 @@
 {
   "name": "prism-container",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "port-version": 1,
   "description": "prism ioc container",
   "homepage": "https://github.com/cpp-prism/prism_container",
